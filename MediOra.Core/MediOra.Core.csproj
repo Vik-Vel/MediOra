@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MediOra.Infrastructure\MediOra.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
