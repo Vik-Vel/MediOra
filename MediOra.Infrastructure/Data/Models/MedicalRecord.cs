@@ -33,7 +33,7 @@ namespace MediOra.Infrastructure.Data.Models
         /// Gets or sets the medical condition or diagnosis of the patient.
         /// </summary>
         [Required]
-        [MaxLength(200)]
+        [MaxLength(MedicalRecordConditionMaxLength)]
         [Comment("Medical condition or diagnosis of the patient.")]
         public required string Condition { get; set; }
 
@@ -47,7 +47,7 @@ namespace MediOra.Infrastructure.Data.Models
         /// <summary>
         /// Gets or sets additional notes about the patient's condition.
         /// </summary>
-        [MaxLength(1000)]
+        [MaxLength(MedicalRecordNotesMaxLength)]
         [Comment("Additional notes about the patient's condition.")]
         public string Notes { get; set; } = string.Empty;
     }
