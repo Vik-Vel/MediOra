@@ -65,7 +65,6 @@ namespace MediOra.Infrastructure.Data.Models
         [Comment("Patient's Date Of Birth")]
         public DateTime DateOfBirth { get; set; }
 
-
         /// <summary>
         /// Gets or sets the list of appointments assigned to the Patient.
         /// </summary>

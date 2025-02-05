@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using static MediOra.Infrastructure.Constants.DataConstants;
@@ -23,11 +24,12 @@ namespace MediOra.Infrastructure.Data.Models
         /// </summary>
         [Required]
         [Comment("Identifier of the user receiving the notification.")]
-        public int UserId { get; set; }
+        public required string UserId { get; set; } 
 
         /// <summary>
         /// Navigation property for the user.
         /// </summary>
+        [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
 
         /// <summary>

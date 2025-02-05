@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using static MediOra.Infrastructure.Constants.DataConstants;
 
@@ -27,6 +28,7 @@ namespace MediOra.Infrastructure.Data.Models
         /// <summary>
         /// Navigation property for the related appointment.
         /// </summary>
+        [ForeignKey(nameof(AppointmentId))]
         public Appointment Appointment { get; set; } = null!;
 
         /// <summary>
@@ -39,6 +41,8 @@ namespace MediOra.Infrastructure.Data.Models
         /// <summary>
         /// Navigation property for the patient.
         /// </summary>
+        [ForeignKey(nameof(PatientId))]
+
         public Patient Patient { get; set; } = null!;
 
         /// <summary>
@@ -51,6 +55,7 @@ namespace MediOra.Infrastructure.Data.Models
         /// <summary>
         /// Navigation property for the doctor.
         /// </summary>
+        [ForeignKey(nameof(DoctorId))]
         public Doctor Doctor { get; set; } = null!;
 
         /// <summary>
