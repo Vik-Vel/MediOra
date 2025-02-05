@@ -71,5 +71,17 @@ namespace MediOra.Infrastructure.Data.Models
         /// </summary>
         [Comment("Patient's Appointments")]
         public List<Appointment> Appointments { get; set; } = new List<Appointment>();
+
+        /// <summary>
+        /// Navigation property for the patient's medical records.
+        /// </summary>
+        [Comment("Medical records associated with the patient.")]
+        public List<MedicalRecord> MedicalRecords { get; set; } = new List<MedicalRecord>();
+
+        /// <summary>
+        /// Navigation property for the feedbacks provided by the patient.
+        /// </summary>
+        [Comment("Feedbacks given by the patient.")]
+        public List<Feedback> Feedbacks { get; set; } = new List<Feedback>();
     }
 }
