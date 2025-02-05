@@ -65,5 +65,12 @@ namespace MediOra.Infrastructure.Data.Models
         /// </summary>
         [ForeignKey(nameof(PatientId))]
         public Patient Patient { get; set; } = null!;
+
+        /// <summary>
+        /// Navigation property for the feedback associated with this appointment.
+        /// </summary>
+        [Comment("Feedback related to this appointment.")]
+        public Feedback? Feedback { get; set; }
+
     }
 }

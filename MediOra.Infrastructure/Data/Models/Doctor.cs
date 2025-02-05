@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediOra.Infrastructure.Data.Models.Mappings;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static MediOra.Infrastructure.Constants.DataConstants;
@@ -86,5 +87,26 @@ namespace MediOra.Infrastructure.Data.Models
         /// </summary>
         [Comment("Doctor's Patients")]
         public List<Patient> Patients { get; set; } = new List<Patient>();
+
+
+        /// <summary>
+        /// Gets or sets the collection of clinics where the doctor works.
+        /// This represents a many-to-many relationship between doctors and clinics.
+        /// </summary>
+        [Comment("Clinics associated with the doctor.")]
+        public List<DoctorClinic> DoctorClinics { get; set; } = new List<DoctorClinic>();
+
+        /// <summary>
+        /// Navigation property for the schedules of the doctor.
+        /// </summary>
+        [Comment("Schedules assigned to the doctor.")]
+        public List<Schedule> Schedules { get; set; } = new List<Schedule>();
+
+        /// <summary>
+        /// Gets or sets the list of appointments associated with the doctor.
+        /// </summary>
+        [Comment("Appointments assigned to the doctor.")]
+        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
+
     }
 }
