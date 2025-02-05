@@ -190,7 +190,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Name = "Downtown Clinic",
                 Address = "111 Downtown St",
                 PhoneNumber = "999-999-9999",
-                WorkingHours = "9 AM - 5 PM"
+                WorkingHours = "9 - 19"
             };
 
             Clinic2 = new Clinic
@@ -199,7 +199,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Name = "Uptown Clinic",
                 Address = "222 Uptown Ave",
                 PhoneNumber = "888-888-8888",
-                WorkingHours = "8 AM - 4 PM"
+                WorkingHours = "8 - 18"
             };
         }
 
@@ -242,6 +242,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
             {
                 Id = 1,
                 AppointmentId = Appointment1.Id,
+                PatientId = Patient1.Id,
+                DoctorId= Doctor1.Id,
                 Comments = "Great service!",
                 Rating = 5,
                 CreatedAt = DateTime.UtcNow
@@ -251,6 +253,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
             {
                 Id = 2,
                 AppointmentId = Appointment2.Id,
+                PatientId = Patient2.Id,
+                DoctorId = Doctor2.Id,
                 Comments = "Very professional.",
                 Rating = 4,
                 CreatedAt = DateTime.UtcNow
@@ -283,7 +287,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
             Notification1 = new Notification
             {
                 Id = 1,
-                UserId = PatientUser.Id.GetHashCode(),
+                UserId = PatientUser.Id,
                 Message = "Your upcoming appointment is tomorrow.",
                 DateTime = DateTime.UtcNow,
                 IsRead = false
@@ -292,7 +296,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
             Notification2 = new Notification
             {
                 Id = 2,
-                UserId = AdminUser.Id.GetHashCode(),
+                UserId = AdminUser.Id,
                 Message = "System maintenance scheduled.",
                 DateTime = DateTime.UtcNow,
                 IsRead = false

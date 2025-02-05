@@ -37,7 +37,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
 
             var data = new SeedData();
 
-            builder.HasData(new Doctor[] { });
+            builder.HasData(new Doctor[] { data.Doctor1,data.Doctor2, data.Doctor3});
         }
     }
 }

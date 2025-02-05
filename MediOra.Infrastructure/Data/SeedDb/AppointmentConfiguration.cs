@@ -23,7 +23,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
 
             var data = new SeedData();
 
-            builder.HasData(new Appointment[] { });
+            builder.HasData(new Appointment[] {data.Appointment1,data.Appointment2, data.Appointment3 });
         }
     }
 }
