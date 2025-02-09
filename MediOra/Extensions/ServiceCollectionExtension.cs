@@ -1,4 +1,5 @@
 ﻿using MediOra.Data;
+using MediOra.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,9 @@ namespace Microsoft.Extensions.DependencyInjection //When extend service collect
             var connectionString = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Repository>();
+
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
