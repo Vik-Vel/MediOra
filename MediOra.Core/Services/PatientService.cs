@@ -1,6 +1,8 @@
-﻿namespace MediOra.Core.Services
+﻿using MediOra.Core.Contracts.Patients;
+
+namespace MediOra.Core.Services
 {
-    public class PatientService
+    public class PatientService : IPatientService
     {
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace MediOra.Core.Services
+﻿using MediOra.Core.Contracts.Appointments;
+
+namespace MediOra.Core.Services
 {
-    public class AppointmentService
+    public class AppointmentService : IAppointmentService
     {
     }
 }
