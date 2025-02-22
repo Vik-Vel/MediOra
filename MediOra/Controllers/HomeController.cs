@@ -23,13 +23,15 @@ namespace MediOra.Controllers
             var totalPatients = _context.Patients.Count();
             var totalAppointments = _context.Appointments.Count();
             var totalFeedbacks = _context.Feedbacks.Count();
+            var totalClinics = _context.Clinics.Count();
 
             var model = new HomePageViewModel
             {
                 TotalDoctors = totalDoctors,
                 TotalPatients = totalPatients,
                 TotalAppointments = totalAppointments,
-                TotalFeedbacks = totalFeedbacks
+                TotalFeedbacks = totalFeedbacks,
+                TotalClinics = totalClinics
             };
 
             return View(model);
