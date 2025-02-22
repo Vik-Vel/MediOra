@@ -1,0 +1,131 @@
+﻿@model IEnumerable<DoctorViewModel>
+
+@* Първо проверяваме ролята на потребителя *@
+@if (User.IsInRole("Administrator"))
+{
+    @* Admin View - оставяме съществуващия изглед с таблицата *@
+    <div class="container-fluid">
+        @* Цялата админ секция от предишния код... *@
+    </div>
+}
+else
+{
+    @* Patient View - показваме картички *@
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="text-center">Our Medical Specialists</h2>
+            </div>
+        </div>
+
+        @* Search Section for Patients *@
+        <div class="row mb-4">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="get" class="row g-3">
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="searchTerm" placeholder="Search by name...">
+                            </div>
+                            <div class="col-md-5">
+                                <select class="form-select" name="specialtyId">
+                                    <option value="">All Specialties</option>
+                                    @* Specialties options here *@
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Doctors Cards *@
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var doctor in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                @if (!string.IsNullOrEmpty(doctor.ImageUrl))
+                                {
+                                    <img src="@doctor.ImageUrl"
+                                         class="rounded-circle"
+                                         style="width: 150px; height: 150px; object-fit: cover;"
+                                         alt="Dr. @doctor.FirstName @doctor.LastName" />
+                                }
+                                else
+                                {
+                                    <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center"
+                                         style="width: 150px; height: 150px;">
+                                        <i class="bi bi-person-circle" style="font-size: 2.5rem;"></i>
+                                    </div>
+                                }
+                            </div>
+
+                            <h5 class="card-title text-center mb-3">
+                                Dr. @doctor.FirstName @doctor.LastName
+                            </h5>
+
+                            <div class="text-center mb-3">
+                                <span class="badge bg-primary">@doctor.SpecialtyName</span>
+                            </div>
+
+                            <div class="card-text">
+                                <div class="mb-2">
+                                    <i class="bi bi-geo-alt text-muted"></i> @doctor.City
+                                </div>
+                                <div class="mb-2">
+                                    <i class="bi bi-telephone text-muted"></i> @doctor.PhoneNumber
+                                </div>
+                                <div class="mb-2">
+                                    <i class="bi bi-envelope text-muted"></i> @doctor.Email
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <div class="d-grid">
+                                <a asp-controller="Appointment"
+                                   asp-action="Create"
+                                   asp-route-doctorId="@doctor.Id"
+                                   class="btn btn-outline-primary">
+                                    <i class="bi bi-calendar-plus"></i> Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @* Pagination for Patient View *@
+        <div class="row mt-4">
+            <div class="col-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        @* Pagination elements *@
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+}
+
+@section Styles {
+    <style>
+        .card {
+            transition: transform 0.2s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
+}
