@@ -10,6 +10,17 @@
 
     <!-- Render the Styles section -->
     @RenderSection("Styles", required: false)
+    <!-- Съществуващите линкове -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .card {
+            transition: transform 0.2s ease-in-out;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+    </style>
 
 </head>
 
@@ -35,6 +46,8 @@
             <!-- Render the Welcome section -->
             @RenderSection("Welcome", required: false)
 
+            <!-- Render the Explore section -->
+            @RenderSection("Explore", required: false)
 
             @RenderBody()
 

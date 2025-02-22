@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediOra", "MediOra\MediOra.csproj", "{5E709E12-1722-4DA2-AD65-EC2568DDC072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediOra", "MediOra\MediOra.csproj", "{5E709E12-1722-4DA2-AD65-EC2568DDC072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediOra.Core", "MediOra.Core\MediOra.Core.csproj", "{CAA3F615-328C-4C4F-8D72-8EEAA48E8000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediOra.Core", "MediOra.Core\MediOra.Core.csproj", "{CAA3F615-328C-4C4F-8D72-8EEAA48E8000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediOra.Infrastructure", "MediOra.Infrastructure\MediOra.Infrastructure.csproj", "{56D43714-54B9-4448-A65A-DD82FF766065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediOra.Infrastructure", "MediOra.Infrastructure\MediOra.Infrastructure.csproj", "{56D43714-54B9-4448-A65A-DD82FF766065}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,20 +1,29 @@
-﻿<ul class="navbar-nav flex-grow-1">
+﻿<ul class="navbar-nav flex-grow-1 gap-3">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="All">Doctors</a>
+        <a class="nav-link d-flex align-items-center gap-2 text-primary fw-semibold hover-effect" asp-area="" asp-controller="Doctor" asp-action="All">
+            <i class="bi bi-people-fill"></i>
+            Doctors
+        </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="All">Appointments</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="All">Contacts</a>
+        <a class="nav-link d-flex align-items-center gap-2 text-primary fw-semibold hover-effect" asp-area="" asp-controller="Clinic" asp-action="All">
+            <i class="bi bi-hospital"></i>
+            Clinics
+        </a>
     </li>
     @if (this.User?.Identity?.IsAuthenticated ?? false)
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Mine">My Appointments</a>
+            <a class="nav-link d-flex align-items-center gap-2 text-primary fw-semibold hover-effect" asp-area="" asp-controller="Appointment" asp-action="Mine">
+                <i class="bi bi-calendar-heart"></i>
+                My Appointments
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Notification" asp-action="All">Notifications</a>
+            <a class="nav-link d-flex align-items-center gap-2 text-primary fw-semibold hover-effect" asp-area="" asp-controller="Notification" asp-action="All">
+                <i class="bi bi-bell-fill"></i>
+                Notifications
+            </a>
         </li>
     }
 </ul>

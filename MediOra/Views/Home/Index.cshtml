@@ -9,6 +9,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .card:hover {
             transform: scale(1.05);
             transition: 0.3s ease-in-out;
@@ -18,61 +19,23 @@
 }
 
 @section Welcome {
-    <div class="welcome-section text-center py-5">
-        <h1>Welcome to MediOra</h1>
-        <p>Your ultimate solution for managing medical appointments.</p>
+    <div class="bg-primary bg-gradient text-white py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h1 class="display-4 fw-bold mb-3">Welcome to MediOra</h1>
+                    <p class="fs-5 mb-0">Your ultimate solution for managing medical appointments.</p>
+                </div>
+            </div>
+        </div>
     </div>
 }
 
-<div class="container mt-4">
-    <h2 class="text-center">Explore the System</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Doctors</h5>
-                    <p class="card-text">Manage and view all registered doctors.</p>
-                    <a href="/Doctors" class="btn btn-primary">View Doctors</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Patients</h5>
-                    <p class="card-text">Manage and view patient records.</p>
-                    <a href="/Patients" class="btn btn-primary">View Patients</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Appointments</h5>
-                    <p class="card-text">Schedule and manage appointments.</p>
-                    <a href="/Appointments" class="btn btn-primary">Manage Appointments</a>
-                </div>
-            </div>
+@section Explore {
+    <div class="container mt-4">
+        <div class="row">
+            @await Component.InvokeAsync(nameof(ExploreSystemComponent))
         </div>
     </div>
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Feedbacks</h5>
-                    <p class="card-text">Read patient feedback and ratings.</p>
-                    <a href="/Feedbacks" class="btn btn-primary">View Feedbacks</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Clinics</h5>
-                    <p class="card-text">Manage clinic information and locations.</p>
-                    <a href="/Clinics" class="btn btn-primary">Manage Clinics</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+}
+
