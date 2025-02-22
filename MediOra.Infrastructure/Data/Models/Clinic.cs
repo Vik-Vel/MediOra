@@ -43,6 +43,13 @@ namespace MediOra.Infrastructure.Data.Models
         public required string Address { get; set; }
 
         /// <summary>
+        /// Gets or sets the URL or path to the clinic's image.
+        /// </summary>
+        [MaxLength(ClinicImageUrlMaxLength)]
+        [Comment("Clinic's Profile Image URL")]
+        public string? ImageUrl { get; set; }
+
+        /// <summary>
         /// Gets or sets the working hours of the clinic.
         /// </summary>
         [Required]

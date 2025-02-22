@@ -118,7 +118,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Address = "123 Main St",
                 City = "New York",
                 Email = "johndoe@mail.com",
-                SpecialtyId = Cardiology.Id
+                SpecialtyId = Cardiology.Id,
+                ImageUrl = "/images/Doctors/Doctor_JohnDoe.jpg"
             };
 
             Doctor2 = new Doctor
@@ -130,7 +131,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Address = "456 Elm St",
                 City = "Los Angeles",
                 Email = "janesmith@mail.com",
-                SpecialtyId = Neurology.Id
+                SpecialtyId = Neurology.Id,
+                ImageUrl = "/images/doctors/Doctor_JaneSmith.jpg"
             };
 
             Doctor3 = new Doctor
@@ -142,7 +144,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Address = "789 Oak St",
                 City = "Chicago",
                 Email = "emmabrown@mail.com",
-                SpecialtyId = Pediatrics.Id
+                SpecialtyId = Pediatrics.Id,
+                ImageUrl = "/images/doctors/Doctor_EmmaBrown.jpg"
             };
         }
 
@@ -156,7 +159,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 PhoneNumber = "111-111-1111",
                 Address = "321 Pine St",
                 Email = "alicejohnson@mail.com",
-                DateOfBirth = new DateTime(1990, 5, 15)
+                DateOfBirth = new DateTime(1990, 5, 15),
+                ImageUrl = "/images/Patients/Patient_AliceJohnson.jpg"
             };
 
             Patient2 = new Patient
@@ -167,7 +171,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 PhoneNumber = "222-222-2222",
                 Address = "654 Maple St",
                 Email = "bobwilliams@mail.com",
-                DateOfBirth = new DateTime(1985, 7, 10)
+                DateOfBirth = new DateTime(1985, 7, 10),
+                ImageUrl = "/images/Patients/Patient_BobWilliams.jpg"
             };
 
             Patient3 = new Patient
@@ -178,7 +183,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 PhoneNumber = "333-333-3333",
                 Address = "987 Cedar St",
                 Email = "charliedavis@mail.com",
-                DateOfBirth = new DateTime(2000, 12, 25)
+                DateOfBirth = new DateTime(2000, 12, 25),
+                ImageUrl = "/images/Patients/Patient_CharlieDavis.jpg"
             };
         }
 
@@ -190,7 +196,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Name = "Downtown Clinic",
                 Address = "111 Downtown St",
                 PhoneNumber = "999-999-9999",
-                WorkingHours = "9 - 19"
+                WorkingHours = "9 - 19",
+                ImageUrl = "/images/Clinics/Clinics_DowntownClinic.jpg"
             };
 
             Clinic2 = new Clinic
@@ -199,7 +206,8 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Name = "Uptown Clinic",
                 Address = "222 Uptown Ave",
                 PhoneNumber = "888-888-8888",
-                WorkingHours = "8 - 18"
+                WorkingHours = "8 - 18",
+                ImageUrl = "/images/Clinics/Clinics_UptownClinic.jpg"
             };
         }
 

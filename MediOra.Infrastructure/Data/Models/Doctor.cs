@@ -67,7 +67,12 @@ namespace MediOra.Infrastructure.Data.Models
         [Comment("Doctor's Email")]
         public required string Email { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the URL or path to the doctor's profile image.
+        /// </summary>
+        [MaxLength(DoctorImageUrlMaxLength)]
+        [Comment("Doctor's Profile Image URL")]
+        public string? ImageUrl { get; set; }
         /// <summary>
         /// Gets or sets the identifier for the doctor's specialty.
         /// </summary>

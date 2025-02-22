@@ -66,6 +66,13 @@ namespace MediOra.Infrastructure.Data.Models
         public DateTime DateOfBirth { get; set; }
 
         /// <summary>
+        /// Gets or sets the URL or path to the patient's profile image.
+        /// </summary>
+        [MaxLength(PatientImageUrlMaxLength)]
+        [Comment("Patient's Profile Image URL")]
+        public string? ImageUrl { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of appointments assigned to the Patient.
         /// </summary>
         [Comment("Patient's Appointments")]
