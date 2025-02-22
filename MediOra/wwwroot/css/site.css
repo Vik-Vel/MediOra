@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*MainMenuComponent css*/
+.hover-effect {
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+    .hover-effect:hover {
+        transform: translateY(-2px);
+        background-color: #f8f9fa;
+        color: #0d6efd !important;
+    }
+
+.nav-link.active {
+    color: #0d6efd !important;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
