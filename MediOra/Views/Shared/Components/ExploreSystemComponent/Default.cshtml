@@ -1,10 +1,9 @@
-﻿@if ((this.User?.Identity?.IsAuthenticated ?? false)
+﻿<h2 class="text-center mb-5 fw-bold text-primary">Explore the System</h2>
+@if ((this.User?.Identity?.IsAuthenticated ?? false)
 && User.Identity.Name != "doctor1@mail.com"
 && User.Identity.Name != "admin@mail.com")
 {
     <div class="container mt-5">
-        <h2 class="text-center mb-5 fw-bold text-primary">Explore the System</h2>
-
         <div class="row g-4">
             <!-- Doctors Card -->
             <div class="col-md-6">
@@ -188,7 +187,6 @@ else if ((this.User?.Identity?.IsAuthenticated ?? false)
         </div>
     </div>
 }
-
 else if ((this.User?.Identity?.IsAuthenticated ?? false) && User.Identity.Name == "doctor1@mail.com")
 {
     <div class="container mt-5">
@@ -220,6 +218,44 @@ else if ((this.User?.Identity?.IsAuthenticated ?? false) && User.Identity.Name =
                         <p class="card-text text-muted mb-4">Read patient feedback and ratings for me.</p>
                         <a href="/Feedback/Mine" class="btn btn-outline-primary mt-auto">
                             <i class="bi bi-arrow-right-circle me-2"></i>View Feedbacks
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container mt-5">
+        <div class="row g-4">
+            <!-- Doctors Card -->
+            <div class="col-md-6">
+                <div class="card border-0 h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column text-center p-4">
+                        <div class="mb-4">
+                            <i class="bi bi-people-fill text-primary" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h5 class="card-title fw-bold mb-3">Doctors</h5>
+                        <p class="card-text text-muted mb-4">View all doctors.</p>
+                        <a href="/Doctor/All" class="btn btn-outline-primary mt-auto">
+                            <i class="bi bi-arrow-right-circle me-2"></i>View Doctors
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clinics Card -->
+            <div class="col-md-6">
+                <div class="card border-0 h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column text-center p-4">
+                        <div class="mb-4">
+                            <i class="bi bi-building text-primary" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h5 class="card-title fw-bold mb-3">Clinics</h5>
+                        <p class="card-text text-muted mb-4">View all clinics information and locations.</p>
+                        <a href="/Clinic/All" class="btn btn-outline-primary mt-auto">
+                            <i class="bi bi-arrow-right-circle me-2"></i>View Clinics
                         </a>
                     </div>
                 </div>
