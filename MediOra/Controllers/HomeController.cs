@@ -1,6 +1,7 @@
 ﻿using MediOra.Core.Models.ViewModels;
 using MediOra.Data;
 using MediOra.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -17,6 +18,7 @@ namespace MediOra.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var totalDoctors = _context.Doctors.Count(); // Вместо repository
