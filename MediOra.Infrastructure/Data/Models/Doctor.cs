@@ -73,6 +73,14 @@ namespace MediOra.Infrastructure.Data.Models
         [MaxLength(DoctorImageUrlMaxLength)]
         [Comment("Doctor's Profile Image URL")]
         public string? ImageUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the doctor's description.
+        /// </summary>
+        [MaxLength(DoctorDescriptionMaxLength)]
+        [Comment("Doctor's Description")]
+        public string? Description {get; set; }
+
         /// <summary>
         /// Gets or sets the identifier for the doctor's specialty.
         /// </summary>

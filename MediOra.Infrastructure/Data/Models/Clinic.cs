@@ -50,6 +50,13 @@ namespace MediOra.Infrastructure.Data.Models
         public string? ImageUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets the doctor's description.
+        /// </summary>
+        [MaxLength(ClinicDescriptionMaxLength)]
+        [Comment("Clinic's Description")]
+        public string? Description { get; set; }
+
+        /// <summary>
         /// Gets or sets the working hours of the clinic.
         /// </summary>
         [Required]
