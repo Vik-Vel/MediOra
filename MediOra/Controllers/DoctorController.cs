@@ -1,5 +1,6 @@
 ﻿using MediOra.Core.Contracts.Doctors;
 using MediOra.Core.Contracts.Specialties;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -13,14 +14,31 @@ namespace MediOra.Controllers
         public DoctorController(IDoctorService _doctorService/*, ISpecialtyService _specialtyService*/)
         {
             doctorService = _doctorService;
-           // specialtyService = _specialtyService;
+            // specialtyService = _specialtyService;
 
         }
-        public async Task<IActionResult> All(string searchTerm, int? specialtyId, string city)
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> AllDoctors()
         {
             var doctors = await doctorService.GetAllAsync();
 
             return View(doctors);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> DetailsDoctor(int id) 
+        {
+            if (!await doctorService.ExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var doctor = await doctorService.DetailsAsync(id);
+
+            return View(doctor);
         }
     }
 }

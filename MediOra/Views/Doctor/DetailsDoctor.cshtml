@@ -1,0 +1,38 @@
+﻿@model DoctorViewModel
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="row g-0">
+            <!-- Doctor Image -->
+            <div class="col-md-4">
+                <img src="@Model.ImageUrl" class="img-fluid rounded-start" alt="Doctor Image">
+            </div>
+
+            <!-- Doctor Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title text-primary fw-bold">@Model.FirstName @Model.LastName</h2>
+                    <h5 class="card-subtitle mb-3 text-muted">@Model.SpecialtyName</h5>
+
+                    <hr>
+
+                    <p><strong>Phone:</strong> @Model.PhoneNumber</p>
+                    <p><strong>Email:</strong> <a href="mailto:@Model.Email">@Model.Email</a></p>
+                    <p><strong>Address:</strong> @Model.Address, @Model.City</p>
+                    <p><strong>Description:</strong> @Model.Description</p>
+
+                    <hr>
+
+                    <div class="d-flex">
+                        <a href="/Appointment/Book?doctorId=@Model.Id" class="btn btn-primary me-2">
+                            <i class="bi bi-calendar-check"></i> Book Appointment
+                        </a>
+                        <a href="/Doctor/AllDoctors" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
