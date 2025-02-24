@@ -47,6 +47,12 @@ namespace MediOra.Core.Models.ViewModels
            ErrorMessage = LengthMessage)]
         public string Email { get; set; } = null!;
 
+        [EmailAddress]
+        [StringLength(DoctorDescriptionMaxLength,
+   MinimumLength = DoctorDescriptionMinLength,
+   ErrorMessage = LengthMessage)]
+        public string Description { get; set; } = null!;
+
         [Display(Name = "Profile Image")]
         public string? ImageUrl { get; set; }
 
