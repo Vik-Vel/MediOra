@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<DoctorViewModel>
 
-@* Първо проверяваме ролята на потребителя *@
+@* First we check the user role *@
 @if (User.IsInRole("Administrator"))
 {
-    @* Admin View - оставяме съществуващия изглед с таблицата *@
+    @* Admin View  *@
     <div class="container-fluid">
-        @* Цялата админ секция от предишния код... *@
+        @* The entire admin section *@
     </div>
 }
 else
 {
-    @* Patient View - показваме картички *@
+    @* Patient View *@
     <div class="container">
         <div class="row mb-4">
             <div class="col-12">
