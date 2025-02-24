@@ -20,13 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Appointment\" />
-    <Folder Include="Views\Clinic\" />
     <Folder Include="Views\Feedback\" />
     <Folder Include="Views\MedicalRecord\" />
     <Folder Include="Views\Speciality\" />
     <Folder Include="Views\Schedule\" />
-    <Folder Include="Views\Notification\" />
     <Folder Include="Views\Patient\" />
     <Folder Include="wwwroot\images\Clinics\" />
     <Folder Include="wwwroot\images\Patients\" />
