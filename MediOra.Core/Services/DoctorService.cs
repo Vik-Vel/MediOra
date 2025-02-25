@@ -25,9 +25,37 @@ namespace MediOra.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> ExistsAsync(int id)
+        public async Task<DoctorViewModel> DetailsAsync(int doctorId)
         {
-            throw new NotImplementedException();
+            Doctor? currentDoctor = await repository
+                                          .All<Doctor>()
+                                          .Include(d => d.Specialty) //  Зарежда Specialty заедно с Doctor
+                                          .FirstOrDefaultAsync(d => d.Id == doctorId);
+
+           // Doctor? currentDoctor = await repository.GetByIdAsync<Doctor>(doctorId);
+
+            var currentDoctorDetails = new DoctorViewModel()
+            {
+                Id = currentDoctor.Id,
+                FirstName = currentDoctor.FirstName,
+                LastName = currentDoctor.LastName,
+                PhoneNumber = currentDoctor.PhoneNumber,
+                Address = currentDoctor.Address,
+                City = currentDoctor.City,
+                Email = currentDoctor.Email,
+                ImageUrl = currentDoctor.ImageUrl,
+                SpecialtyId = currentDoctor.SpecialtyId,
+                SpecialtyName = currentDoctor.Specialty.Name,
+                Description = currentDoctor.Description
+            };
+
+            return currentDoctorDetails;
+        }
+
+        public async Task<bool> ExistsAsync(int id)
+        {
+            return await repository.AllReadOnly<Doctor>()
+                .AnyAsync(a => a.Id == id);
         }
 
         public async Task<IEnumerable<DoctorViewModel>> GetAllAsync()
