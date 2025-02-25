@@ -24,6 +24,8 @@
         public const int DoctorImageUrlMinLength = 10;
         public const int DoctorImageUrlMaxLength = 300;
 
+        public const int DoctorDescriptionMinLength = 10;
+        public const int DoctorDescriptionMaxLength = 2000;
 
         //Patient
         public const int PatientFirstNameMinLength = 2;
@@ -82,6 +84,9 @@
 
         public const int ClinicImageUrlMinLength = 10;
         public const int ClinicImageUrlMaxLength = 300;
+
+        public const int ClinicDescriptionMinLength = 10;
+        public const int ClinicDescriptionMaxLength = 2000;
 
         //MedicalRecord
         public const int MedicalRecordConditionMinLength = 5;
