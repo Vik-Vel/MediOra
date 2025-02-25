@@ -1,8 +1,10 @@
 ﻿using MediOra.Core.Contracts.Doctors;
 using MediOra.Core.Contracts.Specialties;
+using MediOra.Core.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace MediOra.Controllers
 {
@@ -40,5 +42,13 @@ namespace MediOra.Controllers
 
             return View(doctor);
         }
+
+        public async Task <IActionResult> ManageAllDoctors()
+        {
+            var doctors = await doctorService.GetAllAsync();
+
+            return View(doctors);
+        }
+
     }
 }
