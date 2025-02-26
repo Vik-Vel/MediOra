@@ -1,29 +1,48 @@
 ﻿using MediOra.Core.Contracts.Doctors;
+using MediOra.Core.Contracts.Specialties;
 using MediOra.Core.Models.ViewModels;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Web.Mvc;
 
 namespace MediOra.Core.Services
 {
     public class DoctorService : IDoctorService
     {
         private readonly IRepository repository;
+        private readonly ISpecialtyService specialtyService;
 
-        public DoctorService(IRepository _repository)
+        public DoctorService(IRepository _repository, ISpecialtyService _specialtyService)
         {
             repository = _repository;
+            specialtyService = _specialtyService;
         }
 
-        public Task<int> CreateAsync(DoctorViewModel model)
+        public async Task AddDoctor(DoctorCreateViewModel model)
         {
-            throw new NotImplementedException();
+            //create the doctor
+            var doctor = new Doctor
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Address = model.Address,
+                SpecialtyId = (int)model.SpecialtyId,
+                City = model.City,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                ImageUrl = model.ImageUrl
+            };
+
+            await repository.AddAsync(doctor);
+            await repository.SaveChangesAsync();
         }
 
         public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
+
 
         public async Task<DoctorViewModel> DetailsAsync(int doctorId)
         {
@@ -32,7 +51,7 @@ namespace MediOra.Core.Services
                                           .Include(d => d.Specialty) //  Зарежда Specialty заедно с Doctor
                                           .FirstOrDefaultAsync(d => d.Id == doctorId);
 
-           // Doctor? currentDoctor = await repository.GetByIdAsync<Doctor>(doctorId);
+            // Doctor? currentDoctor = await repository.GetByIdAsync<Doctor>(doctorId);
 
             var currentDoctorDetails = new DoctorViewModel()
             {
@@ -86,6 +105,17 @@ namespace MediOra.Core.Services
         public Task<IEnumerable<DoctorViewModel>> GetBySpecialtyAsync(int specialtyId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetSpecialties()
+        {
+            var specialties = await repository.AllReadOnly<Specialty>().ToListAsync();
+
+            return specialties.Select(s => new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name
+            }).ToList();
         }
 
         public Task UpdateAsync(DoctorViewModel model)
