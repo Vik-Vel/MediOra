@@ -1,8 +1,7 @@
-﻿using MediOra.Infrastructure.Data.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using static MediOra.Core.Constants.MessageConstants;
 using static MediOra.Infrastructure.Constants.DataConstants;
-using Microsoft.AspNetCore.Mvc;
 
 public class DoctorCreateViewModel
 {
@@ -20,7 +19,6 @@ public class DoctorCreateViewModel
        ErrorMessage = LengthMessage)]
     [Display(Name = "Last Name")]
     public string LastName { get; set; } = null!;
-
     [Required(ErrorMessage = RequiredMessage)]
     [StringLength(DoctorPhoneNumberMaxLength,
        MinimumLength = DoctorPhoneNumberMinLength,
@@ -59,7 +57,7 @@ ErrorMessage = LengthMessage)]
 
     [Required(ErrorMessage = RequiredMessage)]
     [Display(Name = "Specialty")]
-    public int? SpecialtyId { get; set; } 
-    public IEnumerable<SelectListItem>? Specialties { get; set; } 
+    public int SpecialtyId { get; set; }
+    public IEnumerable<SelectListItem> Specialties { get; set; } = new List<SelectListItem>();
 
 }
