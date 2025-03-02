@@ -56,11 +56,20 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="SpecialtyId" class="form-label"></label>
-        <select asp-for="SpecialtyId" class="form-select" asp-items="Model.Specialties">
-            <option value="">Select a Specialty</option>
-        </select>
-        <span asp-validation-for="SpecialtyId" class="text-danger"></span>
+
+        @Html.DropDownListFor(model => model.SpecialtyId,
+                 new SelectList(Enum.GetValues(typeof(DoctorSpecialtyEnum))
+                 .Cast<DoctorSpecialtyEnum>()
+                 .Select(s => new
+                 {
+                     Id = (int)s,
+                     Name = s.GetType().GetField(s.ToString())
+                 .GetCustomAttributes(typeof(DisplayAttribute), false)
+                 .FirstOrDefault() is DisplayAttribute display ? display.Name : s.ToString()
+                 }), "Id", "Name"),
+                 "Select Specialty",
+                 new { @class = "form-control" })
+
     </div>
 
     <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Save Doctor</button>
