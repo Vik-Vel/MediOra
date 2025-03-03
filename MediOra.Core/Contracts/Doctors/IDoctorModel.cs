@@ -5,15 +5,15 @@
     /// </summary>
     public interface IDoctorModel
     {
-            string FirstName { get; set; }
-            string LastName { get; set; }
-            string PhoneNumber { get; set; }
-            string Address { get; set; }
-            string City { get; set; }
-            string Email { get; set; }
-            string? ImageUrl { get; set; }
-            string? Description { get; set; }
-            int SpecialtyId { get; set; }
+        string FirstName { get; set; }
+        string LastName { get; set; }
+        string PhoneNumber { get; set; }
+        string Address { get; set; }
+        string City { get; set; }
+        string Email { get; set; }
+        string? ImageUrl { get; set; }
+        string? Description { get; set; }
+        int SpecialtyId { get; set; } 
 
     }
 }

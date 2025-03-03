@@ -23,9 +23,9 @@
 	<ItemGroup>
 		<Folder Include="Views\Feedback\" />
 		<Folder Include="Views\MedicalRecord\" />
-		<Folder Include="Views\Speciality\" />
 		<Folder Include="Views\Schedule\" />
 		<Folder Include="Views\Patient\" />
+		<Folder Include="Views\Speciality\" />
 		<Folder Include="wwwroot\images\Clinics\" />
 		<Folder Include="wwwroot\images\Patients\" />
 	</ItemGroup>
