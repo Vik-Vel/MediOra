@@ -1,11 +1,9 @@
 ﻿using MediOra.Core.Contracts.Doctors;
-using MediOra.Core.Enums;
 using MediOra.Core.Models.ViewModels.Doctors;
 using MediOra.Core.Models.ViewModels.Specialities;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Web.Mvc;
 
 namespace MediOra.Core.Services
 {
@@ -112,7 +110,7 @@ namespace MediOra.Core.Services
             currentDoctor.Email = editDoctorForm.Email;
             currentDoctor.ImageUrl = editDoctorForm.ImageUrl;
             currentDoctor.Description = editDoctorForm.Description;
-            currentDoctor.SpecialtyId = editDoctorForm.SpecialtyId; 
+            currentDoctor.SpecialtyId = editDoctorForm.SpecialtyId;
 
             await repository.SaveChangesAsync();
             return currentDoctor.Id;
@@ -147,7 +145,10 @@ namespace MediOra.Core.Services
 
         public async Task<DoctorViewModel> GetDoctorByIdAsync(int id)
         {
-            var currentDoctor = await repository.GetByIdWithIncludesAsync<Doctor>(id, d => d.Specialty);
+            var currentDoctor = await repository
+         .All<Doctor>()
+         .Include(d => d.Specialty)  
+         .FirstOrDefaultAsync(d => d.Id == id);
 
             var doct = new DoctorViewModel
             {
@@ -173,7 +174,7 @@ namespace MediOra.Core.Services
             throw new NotImplementedException();
         }
 
-           public async Task<IEnumerable<SpecialtyViewModel>> GetAllSpecialtiesAsync()
+        public async Task<IEnumerable<SpecialtyViewModel>> GetAllSpecialtiesAsync()
         {
             var specialties = await repository.AllReadOnly<Specialty>().ToListAsync();
 
