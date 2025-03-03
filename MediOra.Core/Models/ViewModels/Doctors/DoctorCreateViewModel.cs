@@ -1,5 +1,5 @@
 ﻿using MediOra.Core.Contracts.Doctors;
-using MediOra.Core.Enums;
+using MediOra.Core.Models.ViewModels.Specialities;
 using System.ComponentModel.DataAnnotations;
 using static MediOra.Core.Constants.MessageConstants;
 using static MediOra.Infrastructure.Constants.DataConstants;
@@ -58,7 +58,6 @@ ErrorMessage = LengthMessage)]
     [Required(ErrorMessage = RequiredMessage)]
     [Display(Name = "Specialty")]
     public int SpecialtyId { get; set; }
-    public IEnumerable<DoctorSpecialtyEnum> Specialties { get; set; } = Enum.GetValues(typeof(DoctorSpecialtyEnum))
-                                                                            .Cast<DoctorSpecialtyEnum>();
+    public IEnumerable<SpecialtyViewModel> Specialties { get; set; } = new List<SpecialtyViewModel>();
 
 }

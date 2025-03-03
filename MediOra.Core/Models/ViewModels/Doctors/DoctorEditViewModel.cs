@@ -1,5 +1,4 @@
 ﻿using MediOra.Core.Contracts.Doctors;
-using MediOra.Core.Enums;
 using MediOra.Core.Models.ViewModels.Specialities;
 using System.ComponentModel.DataAnnotations;
 using static MediOra.Core.Constants.MessageConstants;
