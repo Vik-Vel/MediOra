@@ -21,8 +21,46 @@ namespace MediOra.Infrastructure.Data.SeedDb
                        .OnDelete(DeleteBehavior.Restrict);      // Prevent cascade delete
 
             var data = new SeedData();
+            builder.HasData(new Specialty[]
+            {
+                 data.Cardiology,
+                 data.Neurology,
+                 data.Pediatrics,
+                 data.Dermatology,
+                 data.Orthopedics,
+                 data.Ophthalmology,
+                 data.Psychiatry,
+                 data.Gynecology,
+                 data.Urology,
+                 data.Endocrinology,
+                 data.Gastroenterology,
+                 data.Hematology,
+                 data.InfectiousDiseases,
+                 data.Nephrology,
+                 data.Oncology,
+                 data.Pulmonology,
+                 data.Rheumatology,
+                 data.Allergology,
+                 data.Anesthesiology,
+                 data.Dentistry,
+                 data.PhysicalTherapy,
+                 data.PlasticSurgery,
+                 data.VascularSurgery,
+                 data.Neurosurgery,
+                 data.ENT,
+                 data.EmergencyMedicine,
+                 data.FamilyMedicine,
+                 data.SportsMedicine,
+                 data.Geriatrics,
+                 data.Nutrition,
+                 data.Radiology,
+                 data.NuclearMedicine,
+                 data.MedicalGenetics,
+                 data.ClinicalPsychology,
+                 data.GeneralPractice
+            });
 
-            builder.HasData(new Specialty[] {data.Cardiology,data.Neurology, data.Pediatrics });
+
         }
     }
 }

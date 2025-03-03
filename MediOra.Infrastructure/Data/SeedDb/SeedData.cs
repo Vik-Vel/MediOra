@@ -1,5 +1,4 @@
 ﻿using MediOra.Infrastructure.Data.Models;
-using MediOra.Infrastructure.Data.Models.Mappings;
 using Microsoft.AspNetCore.Identity;
 
 namespace MediOra.Infrastructure.Data.SeedDb
@@ -15,6 +14,39 @@ namespace MediOra.Infrastructure.Data.SeedDb
         public Specialty Cardiology { get; set; }
         public Specialty Neurology { get; set; }
         public Specialty Pediatrics { get; set; }
+        public Specialty Dermatology { get; set; }
+        public Specialty Orthopedics { get; set; }
+        public Specialty Ophthalmology { get; set; }
+        public Specialty Psychiatry { get; set; }
+        public Specialty Gynecology { get; set; }
+        public Specialty Urology { get; set; }
+        public Specialty Endocrinology { get; set; }
+        public Specialty Gastroenterology { get; set; }
+        public Specialty Hematology { get; set; }
+        public Specialty InfectiousDiseases { get; set; }
+        public Specialty Nephrology { get; set; }
+        public Specialty Oncology { get; set; }
+        public Specialty Pulmonology { get; set; }
+        public Specialty Rheumatology { get; set; }
+        public Specialty Allergology { get; set; }
+        public Specialty Anesthesiology { get; set; }
+        public Specialty Dentistry { get; set; }
+        public Specialty PhysicalTherapy { get; set; }
+        public Specialty PlasticSurgery { get; set; }
+        public Specialty VascularSurgery { get; set; }
+        public Specialty Neurosurgery { get; set; }
+        public Specialty ENT { get; set; }
+        public Specialty EmergencyMedicine { get; set; }
+        public Specialty FamilyMedicine { get; set; }
+        public Specialty SportsMedicine { get; set; }
+        public Specialty Geriatrics { get; set; }
+        public Specialty Nutrition { get; set; }
+        public Specialty Radiology { get; set; }
+        public Specialty NuclearMedicine { get; set; }
+        public Specialty MedicalGenetics { get; set; }
+        public Specialty ClinicalPsychology { get; set; }
+        public Specialty GeneralPractice { get; set; }
+
 
         // Doctors
         public Doctor Doctor1 { get; set; }
@@ -105,7 +137,40 @@ namespace MediOra.Infrastructure.Data.SeedDb
             Cardiology = new Specialty { Id = 1, Name = "Cardiology" };
             Neurology = new Specialty { Id = 2, Name = "Neurology" };
             Pediatrics = new Specialty { Id = 3, Name = "Pediatrics" };
+            Dermatology = new Specialty { Id = 4, Name = "Dermatology" };
+            Orthopedics = new Specialty { Id = 5, Name = "Orthopedics & Traumatology" };
+            Ophthalmology = new Specialty { Id = 6, Name = "Ophthalmology" };
+            Psychiatry = new Specialty { Id = 7, Name = "Psychiatry" };
+            Gynecology = new Specialty { Id = 8, Name = "Obstetrics & Gynecology" };
+            Urology = new Specialty { Id = 9, Name = "Urology" };
+            Endocrinology = new Specialty { Id = 10, Name = "Endocrinology" };
+            Gastroenterology = new Specialty { Id = 11, Name = "Gastroenterology" };
+            Hematology = new Specialty { Id = 12, Name = "Hematology" };
+            InfectiousDiseases = new Specialty { Id = 13, Name = "Infectious Diseases" };
+            Nephrology = new Specialty { Id = 14, Name = "Nephrology" };
+            Oncology = new Specialty { Id = 15, Name = "Oncology" };
+            Pulmonology = new Specialty { Id = 16, Name = "Pulmonology" };
+            Rheumatology = new Specialty { Id = 17, Name = "Rheumatology" };
+            Allergology = new Specialty { Id = 18, Name = "Allergology & Immunology" };
+            Anesthesiology = new Specialty { Id = 19, Name = "Anesthesiology & Intensive Care" };
+            Dentistry = new Specialty { Id = 20, Name = "Dentistry" };
+            PhysicalTherapy = new Specialty { Id = 21, Name = "Physical Therapy & Rehabilitation" };
+            PlasticSurgery = new Specialty { Id = 22, Name = "Plastic & Reconstructive Surgery" };
+            VascularSurgery = new Specialty { Id = 23, Name = "Vascular Surgery" };
+            Neurosurgery = new Specialty { Id = 24, Name = "Neurosurgery" };
+            ENT = new Specialty { Id = 25, Name = "Otorhinolaryngology (ENT)" };
+            EmergencyMedicine = new Specialty { Id = 26, Name = "Emergency Medicine" };
+            FamilyMedicine = new Specialty { Id = 27, Name = "Family Medicine" };
+            SportsMedicine = new Specialty { Id = 28, Name = "Sports Medicine" };
+            Geriatrics = new Specialty { Id = 29, Name = "Geriatrics" };
+            Nutrition = new Specialty { Id = 30, Name = "Nutrition & Dietetics" };
+            Radiology = new Specialty { Id = 31, Name = "Radiology & Imaging" };
+            NuclearMedicine = new Specialty { Id = 32, Name = "Nuclear Medicine" };
+            MedicalGenetics = new Specialty { Id = 33, Name = "Medical Genetics" };
+            ClinicalPsychology = new Specialty { Id = 34, Name = "Clinical Psychology" };
+            GeneralPractice = new Specialty { Id = 35, Name = "General Practice" };
         }
+
 
         private void SeedDoctors()
         {
@@ -251,7 +316,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
                 Id = 1,
                 AppointmentId = Appointment1.Id,
                 PatientId = Patient1.Id,
-                DoctorId= Doctor1.Id,
+                DoctorId = Doctor1.Id,
                 Comments = "Great service!",
                 Rating = 5,
                 CreatedAt = DateTime.UtcNow
