@@ -1,4 +1,4 @@
-﻿using MediOra.Core.Models.ViewModels;
+﻿using MediOra.Core.Models.ViewModels.Home;
 using MediOra.Data;
 using MediOra.Models;
 using Microsoft.AspNetCore.Authorization;

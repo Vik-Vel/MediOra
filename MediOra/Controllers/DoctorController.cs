@@ -1,24 +1,17 @@
 ﻿using MediOra.Core.Contracts.Doctors;
-using MediOra.Core.Contracts.Specialties;
-using MediOra.Core.Models.ViewModels;
-using MediOra.Core.Services;
-using MediOra.Infrastructure.Data.Models;
+using MediOra.Core.Models.ViewModels.Doctors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace MediOra.Controllers
 {
     public class DoctorController : BaseController
     {
         private readonly IDoctorService doctorService;
-        //private readonly ISpecialtyService specialtyService;
 
-        public DoctorController(IDoctorService _doctorService/*, ISpecialtyService _specialtyService*/)
+        public DoctorController(IDoctorService _doctorService)
         {
             doctorService = _doctorService;
-            // specialtyService = _specialtyService;
 
         }
 
@@ -33,7 +26,7 @@ namespace MediOra.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> DetailsDoctor(int id) 
+        public async Task<IActionResult> DetailsDoctor(int id)
         {
             if (!await doctorService.ExistsAsync(id))
             {
@@ -45,7 +38,7 @@ namespace MediOra.Controllers
             return View(doctor);
         }
 
-        public async Task <IActionResult> ManageAllDoctors()
+        public async Task<IActionResult> ManageAllDoctors()
         {
             var doctors = await doctorService.GetAllAsync();
 
@@ -53,31 +46,60 @@ namespace MediOra.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public async Task <IActionResult> AddDoctor()
+        //[Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AddDoctor()
         {
-            var model = new DoctorCreateViewModel
-            {
-                Specialties = await doctorService.GetSpecialties()
-            };
+            var model = new DoctorCreateViewModel();
 
             return View(model);
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public async Task <IActionResult> AddDoctor(DoctorCreateViewModel model)
+        //[Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AddDoctor(DoctorCreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                model.Specialties = await doctorService.GetSpecialties();
                 return View(model);
             }
 
-            await doctorService.AddDoctor(model);
+            await doctorService.AddDoctorAsync(model);
             return RedirectToAction(nameof(ManageAllDoctors));
         }
 
+        [HttpGet]
+        //[Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> EditDoctor(int id)
+        {
+            var doctor = await doctorService.GetDoctorByIdAsync(id);
 
+            if (doctor == null)
+            {
+                return BadRequest();
+            }
+
+
+            var doctorEditForm = await doctorService.EditDoctorGetAsync(id);
+            return View(doctorEditForm);
+        }
+
+        [HttpPost]
+        //[Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> EditDoctor(DoctorEditViewModel doctorEditForm)
+        {
+            if (doctorEditForm == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(doctorEditForm);
+            }
+
+            var id = doctorEditForm.Id;
+            await doctorService.EditDoctorPostAsync(doctorEditForm);
+            return RedirectToAction(nameof(ManageAllDoctors), new { id });
+        }
     }
 }
