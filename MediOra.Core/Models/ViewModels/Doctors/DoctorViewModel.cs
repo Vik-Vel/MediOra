@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MediOra.Core.Contracts.Doctors;
+using System.ComponentModel.DataAnnotations;
 using static MediOra.Core.Constants.MessageConstants;
 using static MediOra.Infrastructure.Constants.DataConstants;
-namespace MediOra.Core.Models.ViewModels
+namespace MediOra.Core.Models.ViewModels.Doctors
 {
-    public class DoctorViewModel
+    public class DoctorViewModel : IDoctorModel
     {
         public int Id { get; set; }
         [Required(ErrorMessage = RequiredMessage)]

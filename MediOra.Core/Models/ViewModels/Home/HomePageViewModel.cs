@@ -1,4 +1,4 @@
-﻿namespace MediOra.Core.Models.ViewModels
+﻿namespace MediOra.Core.Models.ViewModels.Home
 {
     public class HomePageViewModel
     {

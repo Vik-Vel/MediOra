@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+﻿using MediOra.Core.Contracts.Doctors;
+using MediOra.Core.Enums;
+using System.ComponentModel.DataAnnotations;
 using static MediOra.Core.Constants.MessageConstants;
 using static MediOra.Infrastructure.Constants.DataConstants;
 
-public class DoctorCreateViewModel
+public class DoctorCreateViewModel : IDoctorModel
 {
     public int Id { get; set; }
     [Required(ErrorMessage = RequiredMessage)]
@@ -46,7 +47,6 @@ public class DoctorCreateViewModel
        ErrorMessage = LengthMessage)]
     public string Email { get; set; } = null!;
 
-    [EmailAddress]
     [StringLength(DoctorDescriptionMaxLength,
 MinimumLength = DoctorDescriptionMinLength,
 ErrorMessage = LengthMessage)]
@@ -58,6 +58,7 @@ ErrorMessage = LengthMessage)]
     [Required(ErrorMessage = RequiredMessage)]
     [Display(Name = "Specialty")]
     public int SpecialtyId { get; set; }
-    public IEnumerable<SelectListItem> Specialties { get; set; } = new List<SelectListItem>();
+    public IEnumerable<DoctorSpecialtyEnum> Specialties { get; set; } = Enum.GetValues(typeof(DoctorSpecialtyEnum))
+                                                                            .Cast<DoctorSpecialtyEnum>();
 
 }
