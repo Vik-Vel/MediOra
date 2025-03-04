@@ -46,16 +46,17 @@ namespace MediOra.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> AddDoctor()
         {
-            var model = new DoctorCreateViewModel();
+            var model = new DoctorCreateViewModel
+            {
+                Specialties = await doctorService.GetAllSpecialtiesAsync() // Взима всички специалности
+            };
 
             return View(model);
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> AddDoctor(DoctorCreateViewModel model)
         {
             if (!ModelState.IsValid)
@@ -68,7 +69,6 @@ namespace MediOra.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> EditDoctor(int id)
         {
             var doctor = await doctorService.GetDoctorByIdAsync(id);
@@ -84,7 +84,6 @@ namespace MediOra.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Administrator")]
         public async Task<IActionResult> EditDoctor(DoctorEditViewModel doctorEditForm)
         {
             if (doctorEditForm == null)
@@ -100,6 +99,36 @@ namespace MediOra.Controllers
             var id = doctorEditForm.Id;
             await doctorService.EditDoctorPostAsync(doctorEditForm);
             return RedirectToAction(nameof(ManageAllDoctors), new { id });
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteDoctor(int id)
+        {
+            var doctor = await doctorService.GetDoctorByIdAsync(id);
+
+            if (doctor == null)
+            {
+                return BadRequest();
+            }
+
+            return View(doctor);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmDeleteDoctor(int id)
+        {
+            var doctorId = id;
+
+            if (!await doctorService.ExistsAsync(doctorId))
+            {
+                return BadRequest();
+            }
+
+            await doctorService.DeleteDoctorAsync(doctorId);
+
+            TempData["SuccessMessage"] = "The doctor was successfully deleted.";
+            return RedirectToAction(nameof(ManageAllDoctors));
         }
     }
 }
