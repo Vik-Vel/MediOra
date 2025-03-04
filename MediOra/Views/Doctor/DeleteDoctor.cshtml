@@ -1,5 +1,21 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DoctorViewModel
 @{
+    ViewData["Title"] = "Потвърждение за изтриване";
 }
+
+<h2>Сигурни ли сте, че искате да изтриете този доктор?</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">@Model.FirstName @Model.LastName</h4>
+        <p><strong>Specialty:</strong> @Model.SpecialtyName</p>
+        <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+    </div>
+</div>
+<br />
+<form asp-action="ConfirmDeleteDoctor" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="ManageAllDoctors" class="btn btn-secondary">Cancel</a>
+</form>
