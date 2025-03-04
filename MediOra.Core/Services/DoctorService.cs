@@ -18,6 +18,7 @@ namespace MediOra.Core.Services
 
         public async Task AddDoctorAsync(DoctorCreateViewModel model)
         {
+            var specialties = await GetAllSpecialtiesAsync();
 
             //create the doctor
             var doctor = new Doctor
@@ -25,21 +26,26 @@ namespace MediOra.Core.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Address = model.Address,
-                SpecialtyId = model.SpecialtyId,
                 City = model.City,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 ImageUrl = model.ImageUrl,
-                Description = model.Description
+                Description = model.Description,
+                SpecialtyId = model.SpecialtyId,
+
             };
 
             await repository.AddAsync(doctor);
             await repository.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteDoctorAsync(int id)
         {
-            throw new NotImplementedException();
+            
+            var doctor = await repository.GetByIdAsync<Doctor>(id);
+            
+            repository.RemoveAsync(doctor);
+            await repository.SaveChangesAsync();
         }
 
 
@@ -75,7 +81,7 @@ namespace MediOra.Core.Services
         {
             var doctor = await repository.GetByIdAsync<Doctor>(doctorId);
 
-            var specialties = await GetAllSpecialtiesAsync(); // ✅ Използваме новия метод
+            var specialties = await GetAllSpecialtiesAsync();
 
             var currentDoctor = new DoctorEditViewModel
             {
