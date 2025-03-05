@@ -26,18 +26,19 @@ namespace MediOra.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> DetailsDoctor(int id)
+        public async Task<IActionResult> DetailsDoctor(int doctorId)
         {
-            if (!await doctorService.ExistsAsync(id))
+            if (!await doctorService.ExistsAsync(doctorId))
             {
                 return BadRequest();
             }
 
-            var doctor = await doctorService.DetailsAsync(id);
+            var doctor = await doctorService.DetailsAsync(doctorId);
 
             return View(doctor);
         }
 
+        [HttpGet]
         public async Task<IActionResult> ManageAllDoctors()
         {
             var doctors = await doctorService.GetAllAsync();
@@ -50,7 +51,7 @@ namespace MediOra.Controllers
         {
             var model = new DoctorCreateViewModel
             {
-                Specialties = await doctorService.GetAllSpecialtiesAsync() // Взима всички специалности
+                Specialties = await doctorService.GetAllSpecialtiesAsync() // Takes all specialties
             };
 
             return View(model);
@@ -69,17 +70,15 @@ namespace MediOra.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditDoctor(int id)
+        public async Task<IActionResult> EditDoctor(int doctorId)
         {
-            var doctor = await doctorService.GetDoctorByIdAsync(id);
+            var doctorEditForm = await doctorService.EditDoctorGetAsync(doctorId);
 
-            if (doctor == null)
+            if (doctorEditForm == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-
-            var doctorEditForm = await doctorService.EditDoctorGetAsync(id);
             return View(doctorEditForm);
         }
 
@@ -88,7 +87,8 @@ namespace MediOra.Controllers
         {
             if (doctorEditForm == null)
             {
-                return BadRequest();
+                return NotFound();
+
             }
 
             if (!ModelState.IsValid)
@@ -103,22 +103,21 @@ namespace MediOra.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteDoctor(int id)
+        public async Task<IActionResult> DeleteDoctor(int doctorId)
         {
-            var doctor = await doctorService.GetDoctorByIdAsync(id);
+            var doctor = await doctorService.GetDoctorByIdAsync(doctorId);
 
             if (doctor == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             return View(doctor);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ConfirmDeleteDoctor(int id)
+        public async Task<IActionResult> ConfirmDeleteDoctor(int doctorId)
         {
-            var doctorId = id;
 
             if (!await doctorService.ExistsAsync(doctorId))
             {
