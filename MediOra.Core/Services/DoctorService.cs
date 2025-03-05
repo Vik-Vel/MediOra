@@ -4,6 +4,7 @@ using MediOra.Core.Models.ViewModels.Specialities;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace MediOra.Core.Services
 {
@@ -18,8 +19,6 @@ namespace MediOra.Core.Services
 
         public async Task AddDoctorAsync(DoctorCreateViewModel model)
         {
-            var specialties = await GetAllSpecialtiesAsync();
-
             //create the doctor
             var doctor = new Doctor
             {
@@ -41,11 +40,17 @@ namespace MediOra.Core.Services
 
         public async Task DeleteDoctorAsync(int id)
         {
-            
+
             var doctor = await repository.GetByIdAsync<Doctor>(id);
-            
-            repository.RemoveAsync(doctor);
+
+            if (doctor == null)
+            {
+                throw new InvalidOperationException($"Doctor with ID {id} not found.");
+            }
+
+            await repository.RemoveAsync<Doctor>(doctor);
             await repository.SaveChangesAsync();
+
         }
 
 
@@ -53,10 +58,13 @@ namespace MediOra.Core.Services
         {
             Doctor? currentDoctor = await repository
                                           .All<Doctor>()
-                                          .Include(d => d.Specialty) //  Зарежда Specialty заедно с Doctor
+                                          .Include(d => d.Specialty) //  Loading a Specialty together with a Doctor
                                           .FirstOrDefaultAsync(d => d.Id == doctorId);
 
-            // Doctor? currentDoctor = await repository.GetByIdAsync<Doctor>(doctorId);
+            if (currentDoctor == null)
+            {
+                throw new InvalidOperationException($"Doctor with ID {doctorId} not found.");
+            }
 
             var currentDoctorDetails = new DoctorViewModel()
             {
@@ -80,6 +88,11 @@ namespace MediOra.Core.Services
         public async Task<DoctorEditViewModel> EditDoctorGetAsync(int doctorId)
         {
             var doctor = await repository.GetByIdAsync<Doctor>(doctorId);
+
+            if (doctor == null)
+            {
+                throw new InvalidOperationException($"Doctor with ID {doctorId} not found.");
+            }
 
             var specialties = await GetAllSpecialtiesAsync();
 
@@ -107,6 +120,11 @@ namespace MediOra.Core.Services
         public async Task<int> EditDoctorPostAsync(DoctorEditViewModel editDoctorForm)
         {
             var currentDoctor = await repository.GetByIdAsync<Doctor>(editDoctorForm.Id);
+
+            if (currentDoctor == null)
+            {
+                throw new InvalidOperationException($"Doctor with ID {editDoctorForm.Id} not found.");
+            }
 
             currentDoctor.FirstName = editDoctorForm.FirstName;
             currentDoctor.LastName = editDoctorForm.LastName;
@@ -153,7 +171,7 @@ namespace MediOra.Core.Services
         {
             var currentDoctor = await repository
          .All<Doctor>()
-         .Include(d => d.Specialty)  
+         .Include(d => d.Specialty)
          .FirstOrDefaultAsync(d => d.Id == id);
 
             var doct = new DoctorViewModel
@@ -175,9 +193,25 @@ namespace MediOra.Core.Services
             return doct;
         }
 
-        public Task<IEnumerable<DoctorViewModel>> GetBySpecialtyAsync(int specialtyId)
+        public async Task<IEnumerable<DoctorViewModel>> GetBySpecialtyAsync(int specialtyId)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadOnly<Doctor>()
+                 .Where(d => d.SpecialtyId == specialtyId)
+                 .Select(d => new DoctorViewModel
+                 {
+                     Id = d.Id,
+                     FirstName = d.FirstName,
+                     LastName = d.LastName,
+                     PhoneNumber = d.PhoneNumber,
+                     Address = d.Address,
+                     City = d.City,
+                     Email = d.Email,
+                     SpecialtyId = d.SpecialtyId,
+                     SpecialtyName = d.Specialty.Name,
+                     ImageUrl = d.ImageUrl,
+                 })
+                 .ToListAsync();
+
         }
 
         public async Task<IEnumerable<SpecialtyViewModel>> GetAllSpecialtiesAsync()
