@@ -225,5 +225,38 @@ namespace MediOra.Core.Services
             }).ToList();
         }
 
+        public async Task<IEnumerable<DoctorViewModel>> GetFilteredDoctorsAsync(string searchTerm, int? specialtyId)
+        {
+            var query = repository.AllReadOnly<Doctor>()
+                .Include(d => d.Specialty) // Load Specialty for each Doctor
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(d => (d.FirstName + " " + d.LastName).Contains(searchTerm));
+            }
+
+            if (specialtyId.HasValue && specialtyId.Value > 0)
+            {
+                query = query.Where(d => d.SpecialtyId == specialtyId.Value);
+            }
+
+            return await query
+                .Select(d => new DoctorViewModel
+                {
+                    Id = d.Id,
+                    FirstName = d.FirstName,
+                    LastName = d.LastName,
+                    City = d.City,
+                    PhoneNumber = d.PhoneNumber,
+                    Email = d.Email,
+                    ImageUrl = d.ImageUrl,
+                    SpecialtyId = d.SpecialtyId,
+                    SpecialtyName = d.Specialty.Name
+                })
+                .ToListAsync();
+        }
+
+
     }
 }

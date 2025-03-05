@@ -17,6 +17,7 @@ namespace MediOra.Core.Contracts.Doctors
         Task<DoctorEditViewModel> EditDoctorGetAsync(int doctorId);
         Task<int> EditDoctorPostAsync(DoctorEditViewModel editDoctorForm);
         Task<IEnumerable<SpecialtyViewModel>> GetAllSpecialtiesAsync();
+        Task<IEnumerable<DoctorViewModel>> GetFilteredDoctorsAsync(string searchTerm, int? specialtyId);
 
     }
 }

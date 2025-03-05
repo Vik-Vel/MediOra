@@ -17,12 +17,17 @@ namespace MediOra.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> AllDoctors()
+        public async Task<IActionResult> AllDoctors(string searchTerm, int? specialtyId)
         {
-            var doctors = await doctorService.GetAllAsync();
+            var doctors = await doctorService.GetFilteredDoctorsAsync(searchTerm, specialtyId);
+
+            var specialties = await doctorService.GetAllSpecialtiesAsync(); // Взимаме специалностите за dropdown
+
+            ViewBag.Specialties = specialties; // Изпращаме специалностите към View-то
 
             return View(doctors);
         }
+
 
         [HttpGet]
         [AllowAnonymous]

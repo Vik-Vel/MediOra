@@ -19,28 +19,31 @@ else
         </div>
 
         @* Search Section for Patients *@
-        <div class="row mb-4">
-            <div class="col-md-8 mx-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <form method="get" class="row g-3">
-                            <div class="col-md-5">
-                                <input type="text" class="form-control" name="searchTerm" placeholder="Search by name...">
-                            </div>
-                            <div class="col-md-5">
-                                <select class="form-select" name="specialtyId">
-                                    <option value="">All Specialties</option>
-                                    @* Specialties options here *@
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-primary w-100">Search</button>
-                            </div>
-                        </form>
-                    </div>
+        <div class="search-container mb-4">
+            <form method="get" class="row g-3">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="searchTerm" placeholder="Search by name..."
+                           value="@Context.Request.Query["searchTerm"]">
                 </div>
-            </div>
+                <div class="col-md-5">
+                    <select class="form-select" name="specialtyId">
+                        <option value="">All Specialties</option>
+                        @foreach (var specialty in ViewBag.Specialties)
+                        {
+                            <option value="@specialty.Id"
+                                    selected="@(Context.Request.Query["specialtyId"] == specialty.Id.ToString())">
+                                @specialty.Name
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
         </div>
+
+
 
         @* Doctors Cards *@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
