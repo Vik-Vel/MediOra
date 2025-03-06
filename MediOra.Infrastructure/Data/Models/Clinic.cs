@@ -35,6 +35,13 @@ namespace MediOra.Infrastructure.Data.Models
         public required string PhoneNumber { get; set; }
 
         /// <summary>
+        /// Gets or sets the Clinic's city.
+        /// </summary>
+        [MaxLength(ClinicCityMaxLength)]
+        [Comment("Clinic's City")]
+        public string City { get; set; } = string.Empty;
+
+        /// <summary>
         /// Gets or sets the address of the clinic.
         /// </summary>
         [Required]
