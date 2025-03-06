@@ -54,7 +54,7 @@ namespace MediOra.Core.Services
         }
 
 
-        public async Task<DoctorViewModel> DetailsAsync(int doctorId)
+        public async Task<DoctorViewModel> DetailsDoctorAsync(int doctorId)
         {
             Doctor? currentDoctor = await repository
                                           .All<Doctor>()
