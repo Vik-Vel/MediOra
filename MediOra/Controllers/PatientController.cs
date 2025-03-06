@@ -1,12 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediOra.Core.Contracts.Patients;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MediOra.Controllers
 {
     public class PatientController : BaseController
     {
-        public IActionResult Index()
+        private readonly IPatientService patientService;
+
+        public PatientController(IPatientService _patientService)
         {
-            return View();
+            patientService = _patientService;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> AllPatients()
+        {
+             var patients = await patientService.GetAllPatientsAsync();
+
+            return View(patients);
         }
     }
 }
