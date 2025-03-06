@@ -147,7 +147,7 @@ namespace MediOra.Core.Services
                 .AnyAsync(a => a.Id == id);
         }
 
-        public async Task<IEnumerable<DoctorViewModel>> GetAllAsync()
+        public async Task<IEnumerable<DoctorViewModel>> GetAllDoctorsAsync()
         {
             return await repository.AllReadOnly<Doctor>()
                 .Select(d => new DoctorViewModel

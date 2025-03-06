@@ -7,12 +7,12 @@ namespace MediOra.Core.Contracts.Doctors
 {
     public interface IDoctorService
     {
-        Task<IEnumerable<DoctorViewModel>> GetAllAsync();
+        Task<IEnumerable<DoctorViewModel>> GetAllDoctorsAsync();
         Task<DoctorViewModel> GetDoctorByIdAsync(int id);
         Task DeleteDoctorAsync(int id);
         Task<bool> ExistsAsync(int id);
         Task<IEnumerable<DoctorViewModel>> GetBySpecialtyAsync(int specialtyId);
-        Task<DoctorViewModel> DetailsAsync(int doctorId);
+        Task<DoctorViewModel> DetailsDoctorAsync(int doctorId);
         Task AddDoctorAsync(DoctorCreateViewModel model);
         Task<DoctorEditViewModel> EditDoctorGetAsync(int doctorId);
         Task<int> EditDoctorPostAsync(DoctorEditViewModel editDoctorForm);

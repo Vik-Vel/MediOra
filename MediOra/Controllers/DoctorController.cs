@@ -38,7 +38,7 @@ namespace MediOra.Controllers
                 return BadRequest();
             }
 
-            var doctor = await doctorService.DetailsAsync(doctorId);
+            var doctor = await doctorService.DetailsDoctorAsync(doctorId);
 
             return View(doctor);
         }
@@ -46,7 +46,7 @@ namespace MediOra.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageAllDoctors()
         {
-            var doctors = await doctorService.GetAllAsync();
+            var doctors = await doctorService.GetAllDoctorsAsync();
 
             return View(doctors);
         }
