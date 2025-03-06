@@ -76,6 +76,9 @@
         public const int ClinicPhoneNumberMinLength = 5;
         public const int ClinicPhoneNumberMaxLength = 25;
 
+        public const int ClinicCityMinLength = 2;
+        public const int ClinicCityMaxLength = 50;
+
         public const int ClinicAddressMinLength = 10;
         public const int ClinicAddressMaxLength = 100;
 
@@ -87,7 +90,7 @@
 
         public const int ClinicDescriptionMinLength = 10;
         public const int ClinicDescriptionMaxLength = 2000;
-
+        
         //MedicalRecord
         public const int MedicalRecordConditionMinLength = 5;
         public const int MedicalRecordConditionMaxLength = 1000;
