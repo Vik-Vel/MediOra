@@ -14,7 +14,6 @@ namespace MediOra.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> AllPatients()
         {
              var patients = await patientService.GetAllPatientsAsync();
