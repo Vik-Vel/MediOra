@@ -1,4 +1,5 @@
 ﻿using MediOra.Core.Contracts.Patients;
+using MediOra.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,20 @@ namespace MediOra.Controllers
              var patients = await patientService.GetAllPatientsAsync();
 
             return View(patients);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> DetailsPatient(int patientId)
+        {
+            if (!await patientService.ExistsPatientAsync(patientId))
+            {
+                return BadRequest();
+            }
+
+            var patient = await patientService.DetailsPatientAsync(patientId);
+
+            return View(patient);
         }
     }
 }
