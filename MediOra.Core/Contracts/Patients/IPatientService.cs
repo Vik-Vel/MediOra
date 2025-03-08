@@ -8,8 +8,8 @@ namespace MediOra.Core.Contracts.Patients
         Task<IEnumerable<PatientViewModel>> GetAllPatientsAsync();
         Task<PatientViewModel> GetPatientByIdAsync(int id);
         Task DeletePatientAsync(int id);
-        Task<bool> ExistsAsync(int id);
-        Task<PatientViewModel> DetailsAsync(int PatientId);
+        Task<bool> ExistsPatientAsync(int id);
+        Task<PatientViewModel> DetailsPatientAsync(int patientId);
         //Task AddPatientAsync(PatientCreateViewModel model);
         //Task<PatientEditViewModel> EditPatientGetAsync(int PatientId);
         //Task<int> EditPatientPostAsync(PatientEditViewModel editPatientForm);
