@@ -1,4 +1,5 @@
 ﻿using MediOra.Core.Contracts.Patients;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using static MediOra.Core.Constants.MessageConstants;
@@ -40,6 +41,14 @@ namespace MediOra.Core.Models.ViewModels.Patients
            ErrorMessage = LengthMessage)]
         public string Address { get; set; } = null!;
 
+        [Required(ErrorMessage = RequiredMessage)]
+        [StringLength(PatientCityMaxLength,
+          MinimumLength = PatientCityMinLength,
+          ErrorMessage = LengthMessage)]
+        [Comment("Patient's City")]
+        public string City { get; set; } = string.Empty;
+
+
         [DisplayName("Email")]
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(PatientEmailMaxLength,
@@ -64,5 +73,15 @@ namespace MediOra.Core.Models.ViewModels.Patients
             if (birthDate.Date > today.AddYears(-age)) age--;
             return age;
         }
+
+        [DisplayName("Appointment Count")]
+        public int AppointmentCount { get; set; }
+
+        [DisplayName("Medical Record Count")]
+        public int MedicalRecordCount { get; set; }
+
+        [DisplayName("Latest Appointment")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}", ApplyFormatInEditMode = false)]
+        public DateTime? LatestAppointmentDate { get; set; }
     }
 }
