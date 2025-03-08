@@ -1,0 +1,173 @@
+﻿@model PatientViewModel
+
+@{
+    ViewBag.Title = "Patient Details";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="btn-group">
+                <a href="@Url.Action("AllPatients")" class="btn btn-secondary">
+                    <i class="fa fa-arrow-left"></i> Back to List
+                </a>
+                <a href="@Url.Action("EditPatient", new { id = Model.Id })" class="btn btn-primary">
+                    <i class="fa fa-edit"></i> Edit
+                </a>
+                <a href="@Url.Action("DeletePatient", new { id = Model.Id })" class="btn btn-danger">
+                    <i class="fa fa-trash"></i> Delete
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Patient Information</h3>
+                </div>
+                <div class="card-body box-profile">
+                    <div class="text-center mb-3">
+                        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="@Model.ImageUrl"
+                                 alt="Patient profile picture"
+                                 style="width: 100px; height: 100px;">
+                        }
+                        else
+                        {
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="~/Content/Images/default-profile.png"
+                                 alt="Default profile picture"
+                                 style="width: 100px; height: 100px;">
+                        }
+                    </div>
+
+                    <h3 class="profile-username text-center">@Model.FullName</h3>
+                    <p class="text-muted text-center">Patient ID: @Model.Id</p>
+
+                    <ul class="list-group list-group-unbordered mb-3">
+                        <li class="list-group-item">
+                            <b>Date of Birth</b> <span class="float-right">@Model.DateOfBirth.ToString("dd/MM/yyyy")</span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Age</b> <span class="float-right">@Model.Age years</span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Phone</b> <span class="float-right">@Model.PhoneNumber</span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Email</b> <span class="float-right">@Model.Email</span>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Address</b> <span class="float-right">@Model.Address</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Medical Summary</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="info-box bg-info">
+                                        <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Appointments: </span>
+                                            <span class="info-box-number">@Model.AppointmentCount</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="info-box bg-success">
+                                        <span class="info-box-icon"><i class="far fa-file-alt"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Medical Records: </span>
+                                            <span class="info-box-number">@Model.MedicalRecordCount</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="info-box bg-warning">
+                                        <span class="info-box-icon"><i class="far fa-clock"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Latest Appointment: </span>
+                                            <span class="info-box-number">
+                                                @if (Model.LatestAppointmentDate.HasValue)
+                                                {
+                                                    @Model.LatestAppointmentDate.Value.ToString("dd/MM/yyyy HH:mm")
+                                                }
+                                                else
+                                                {
+                                                    <text>No appointments</text>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Patient Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" >
+                                <div class="col-md-4">
+                                    <a href="@Url.Action("Index", "Appointment", new { patientId = Model.Id })" class="btn btn-block btn-info">
+                                        <i class="fas fa-calendar"></i> View Appointments
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="@Url.Action("Index", "MedicalRecord", new { patientId = Model.Id })" class="btn btn-block btn-success">
+                                        <i class="fas fa-file-medical"></i> View Medical Records
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.AppointmentCount > 0)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Recent Appointments</h3>
+                                <div class="card-tools">
+                                    <a href="@Url.Action("Index", "Appointment", new { patientId = Model.Id })" class="btn btn-tool">
+                                        <i class="fas fa-arrow-right"></i> View All
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">
+                                    This section would display recent appointments data, which is not loaded in the current view model.
+                                    To implement, you would need to extend the model to include recent appointments data.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
