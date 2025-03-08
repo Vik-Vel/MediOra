@@ -141,7 +141,7 @@ namespace MediOra.Core.Services
         }
 
 
-        public async Task<bool> ExistsAsync(int id)
+        public async Task<bool> ExistsDoctorAsync(int id)
         {
             return await repository.AllReadOnly<Doctor>()
                 .AnyAsync(a => a.Id == id);

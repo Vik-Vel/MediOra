@@ -33,7 +33,7 @@ namespace MediOra.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> DetailsDoctor(int doctorId)
         {
-            if (!await doctorService.ExistsAsync(doctorId))
+            if (!await doctorService.ExistsDoctorAsync(doctorId))
             {
                 return BadRequest();
             }
@@ -124,7 +124,7 @@ namespace MediOra.Controllers
         public async Task<IActionResult> ConfirmDeleteDoctor(int doctorId)
         {
 
-            if (!await doctorService.ExistsAsync(doctorId))
+            if (!await doctorService.ExistsDoctorAsync(doctorId))
             {
                 return BadRequest();
             }

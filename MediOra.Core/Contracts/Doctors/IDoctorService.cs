@@ -10,7 +10,7 @@ namespace MediOra.Core.Contracts.Doctors
         Task<IEnumerable<DoctorViewModel>> GetAllDoctorsAsync();
         Task<DoctorViewModel> GetDoctorByIdAsync(int id);
         Task DeleteDoctorAsync(int id);
-        Task<bool> ExistsAsync(int id);
+        Task<bool> ExistsDoctorAsync(int id);
         Task<IEnumerable<DoctorViewModel>> GetBySpecialtyAsync(int specialtyId);
         Task<DoctorViewModel> DetailsDoctorAsync(int doctorId);
         Task AddDoctorAsync(DoctorCreateViewModel model);
