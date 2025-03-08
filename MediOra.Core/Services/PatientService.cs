@@ -1,4 +1,5 @@
 ﻿using MediOra.Core.Contracts.Patients;
+using MediOra.Core.Models.ViewModels.Doctors;
 using MediOra.Core.Models.ViewModels.Patients;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
@@ -20,14 +21,35 @@ namespace MediOra.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<PatientViewModel> DetailsAsync(int PatientId)
+        public async Task<PatientViewModel> DetailsPatientAsync(int patientId)
         {
-            throw new NotImplementedException();
+            Patient? currentPatient = await repository.GetByIdAsync<Patient>(patientId);
+
+            if (currentPatient == null)
+            {
+                throw new InvalidOperationException($"Patient with ID {patientId} not found.");
+            }
+
+            var currentPatientDetails = new PatientViewModel()
+            {
+                Id = currentPatient.Id,
+                FirstName = currentPatient.FirstName,
+                LastName = currentPatient.LastName,
+                PhoneNumber = currentPatient.PhoneNumber,
+                Address = currentPatient.Address,
+                City = currentPatient.City,
+                Email = currentPatient.Email,
+                ImageUrl = currentPatient.ImageUrl,
+                DateOfBirth = currentPatient.DateOfBirth,
+            };
+
+            return currentPatientDetails;
         }
 
-        public Task<bool> ExistsAsync(int id)
+        public async Task<bool> ExistsPatientAsync(int id)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadOnly<Patient>()
+                .AnyAsync(a => a.Id == id);
         }
 
         public async Task<IEnumerable<PatientViewModel>> GetAllPatientsAsync()
