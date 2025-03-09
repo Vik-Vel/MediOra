@@ -1,6 +1,7 @@
 ﻿using MediOra.Core.Contracts.Patients;
+using MediOra.Core.Models.ViewModels.Doctors;
+using MediOra.Core.Models.ViewModels.Patients;
 using MediOra.Core.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediOra.Controllers
@@ -15,9 +16,9 @@ namespace MediOra.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllPatients()
+        public async Task<IActionResult> ManageAllPatients()
         {
-             var patients = await patientService.GetAllPatientsAsync();
+            var patients = await patientService.GetAllPatientsAsync();
 
             return View(patients);
         }
@@ -35,5 +36,39 @@ namespace MediOra.Controllers
 
             return View(patient);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditPatient(int patientId)
+        {
+            var patientEditForm = await patientService.EditPatientGetAsync(patientId);
+
+            if (patientEditForm == null)
+            {
+                return NotFound();
+            }
+
+            return View(patientEditForm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPatient(PatientEditViewModel patientEditForm)
+        {
+            if (patientEditForm == null)
+            {
+                return NotFound();
+
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(patientEditForm);
+            }
+
+            var id = patientEditForm.Id;
+            await patientService.EditPatientPostAsync(patientEditForm);
+            return RedirectToAction(nameof(ManageAllPatients), new { id });
+
+        }
+
     }
 }
