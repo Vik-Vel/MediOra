@@ -11,8 +11,8 @@ namespace MediOra.Core.Contracts.Patients
         Task<bool> ExistsPatientAsync(int id);
         Task<PatientViewModel> DetailsPatientAsync(int patientId);
         //Task AddPatientAsync(PatientCreateViewModel model);
-        //Task<PatientEditViewModel> EditPatientGetAsync(int PatientId);
-        //Task<int> EditPatientPostAsync(PatientEditViewModel editPatientForm);
+        Task<PatientEditViewModel> EditPatientGetAsync(int patientId);
+        Task<int> EditPatientPostAsync(PatientEditViewModel editPatientForm);
         //Task<IEnumerable<PatientViewModel>> GetFilteredPatientsAsync(string searchTerm, int? specialtyId);
     }
 }

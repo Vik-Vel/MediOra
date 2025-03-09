@@ -1,5 +1,4 @@
 ﻿using MediOra.Core.Contracts.Patients;
-using MediOra.Core.Models.ViewModels.Doctors;
 using MediOra.Core.Models.ViewModels.Patients;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
@@ -44,6 +43,53 @@ namespace MediOra.Core.Services
             };
 
             return currentPatientDetails;
+        }
+
+        public async Task<PatientEditViewModel> EditPatientGetAsync(int patientId)
+        {
+            var patient = await repository.GetByIdAsync<Patient>(patientId);
+
+            if(patient == null)
+            {
+                throw new InvalidOperationException($"Patient with ID {patientId} not found.");
+            }
+
+            var currentPatient = new PatientEditViewModel
+            {
+                Id = patient.Id,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                PhoneNumber = patient.PhoneNumber,
+                Address = patient.Address,
+                City = patient.City,
+                Email = patient.Email,
+                ImageUrl = patient.ImageUrl,
+                DateOfBirth = patient.DateOfBirth,
+            };
+
+            return currentPatient;
+        }
+
+        public async Task<int> EditPatientPostAsync(PatientEditViewModel editPatientForm)
+        {
+            var patient = await repository.GetByIdAsync<Patient>(editPatientForm.Id);
+
+            if (patient == null)
+            {
+                throw new InvalidOperationException($"Patient with ID {patient.Id} not found.");
+            }
+
+            patient.FirstName = editPatientForm.FirstName;
+            patient.LastName = editPatientForm.LastName;
+            patient.PhoneNumber = editPatientForm.PhoneNumber;
+            patient.Address = editPatientForm.Address;
+            patient.City = editPatientForm.City;
+            patient.Email = editPatientForm.Email;
+            patient.ImageUrl = editPatientForm.ImageUrl;
+            patient.ImageUrl = editPatientForm.ImageUrl;
+
+            await repository.SaveChangesAsync();
+            return patient.Id;
         }
 
         public async Task<bool> ExistsPatientAsync(int id)
