@@ -107,6 +107,7 @@ namespace MediOra.Core.Services
                     FirstName = p.FirstName,
                     LastName = p.LastName,
                     PhoneNumber = p.PhoneNumber,
+                    City = p.City,
                     Email = p.Email,
                     Address = p.Address,
                     ImageUrl = p.ImageUrl,
