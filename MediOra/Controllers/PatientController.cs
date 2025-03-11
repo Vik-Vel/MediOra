@@ -1,4 +1,5 @@
-﻿using MediOra.Core.Contracts.Patients;
+﻿using MediOra.Core.Contracts.Doctors;
+using MediOra.Core.Contracts.Patients;
 using MediOra.Core.Models.ViewModels.Doctors;
 using MediOra.Core.Models.ViewModels.Patients;
 using MediOra.Core.Services;
@@ -68,6 +69,34 @@ namespace MediOra.Controllers
             await patientService.EditPatientPostAsync(patientEditForm);
             return RedirectToAction(nameof(ManageAllPatients), new { id });
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePatient(int patientId)
+        {
+            var patient = await patientService.GetPatientByIdAsync(patientId);
+
+            if (patient != null)
+            {
+                return NotFound();
+            }
+
+            return View(patient);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmDeleteDoctor(int patientId)
+        {
+
+            if (!await patientService.ExistsPatientAsync(patientId))
+            {
+                return BadRequest();
+            }
+
+            await patientService.DeletePatientAsync(patientId);
+
+            TempData["SuccessMessage"] = "The patient was successfully deleted.";
+            return RedirectToAction(nameof(ManageAllPatients));
         }
 
     }
