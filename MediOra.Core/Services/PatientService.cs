@@ -3,6 +3,7 @@ using MediOra.Core.Models.ViewModels.Patients;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace MediOra.Core.Services
 {
@@ -15,9 +16,17 @@ namespace MediOra.Core.Services
             repository = _repository;
         }
 
-        public Task DeletePatientAsync(int id)
+        public async Task DeletePatientAsync(int id)
         {
-            throw new NotImplementedException();
+            var patient = await repository.GetByIdAsync<Patient>(id);
+
+            if (patient == null)
+            {
+                throw new InvalidOperationException($"Patient with ID {id} not found.");
+            }
+
+            await repository.RemoveAsync<Patient>(patient);
+            await repository.SaveChangesAsync();
         }
 
         public async Task<PatientViewModel> DetailsPatientAsync(int patientId)
@@ -49,7 +58,7 @@ namespace MediOra.Core.Services
         {
             var patient = await repository.GetByIdAsync<Patient>(patientId);
 
-            if(patient == null)
+            if (patient == null)
             {
                 throw new InvalidOperationException($"Patient with ID {patientId} not found.");
             }
@@ -101,7 +110,7 @@ namespace MediOra.Core.Services
         public async Task<IEnumerable<PatientViewModel>> GetAllPatientsAsync()
         {
             return await repository.AllReadOnly<Patient>()
-                .Select(p=> new PatientViewModel
+                .Select(p => new PatientViewModel
                 {
                     Id = p.Id,
                     FirstName = p.FirstName,
@@ -116,9 +125,29 @@ namespace MediOra.Core.Services
                 .ToListAsync();
         }
 
-        public Task<PatientViewModel> GetPatientByIdAsync(int id)
+        public async Task<PatientViewModel> GetPatientByIdAsync(int patientId)
         {
-            throw new NotImplementedException();
+            var currentPatient = await repository.GetByIdAsync<Patient>(patientId);
+
+            if (currentPatient == null)
+            {
+                throw new InvalidOperationException($"Patient with ID {patientId} not found.");
+            }
+
+            var patient = new PatientViewModel
+            {
+                Id = currentPatient.Id,
+                FirstName = currentPatient.FirstName,
+                LastName = currentPatient.LastName,
+                PhoneNumber = currentPatient.PhoneNumber,
+                City = currentPatient.City,
+                Email = currentPatient.Email,
+                Address = currentPatient.Address,
+                ImageUrl = currentPatient.ImageUrl,
+                DateOfBirth = currentPatient.DateOfBirth,
+            };
+
+            return patient;
         }
     }
 }
