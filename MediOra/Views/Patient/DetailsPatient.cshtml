@@ -11,10 +11,10 @@
                 <a href="@Url.Action("ManageAllPatients")" class="btn btn-secondary">
                     <i class="fa fa-arrow-left"></i> Back to List
                 </a>
-                <a href="@Url.Action("EditPatient", new { id = Model.Id })" class="btn btn-primary">
+                <a href="@Url.Action("EditPatient", new { patientId = Model.Id })" class="btn btn-primary">
                     <i class="fa fa-edit"></i> Edit
                 </a>
-                <a href="@Url.Action("DeletePatient", new { id = Model.Id })" class="btn btn-danger">
+                <a href="@Url.Action("DeletePatient", new { patientId = Model.Id })" class="btn btn-danger">
                     <i class="fa fa-trash"></i> Delete
                 </a>
             </div>
@@ -128,7 +128,7 @@
                             <h3 class="card-title">Patient Actions</h3>
                         </div>
                         <div class="card-body">
-                            <div class="row" >
+                            <div class="row justify-content-center">
                                 <div class="col-md-4">
                                     <a href="@Url.Action("Index", "Appointment", new { patientId = Model.Id })" class="btn btn-block btn-info">
                                         <i class="fas fa-calendar"></i> View Appointments
