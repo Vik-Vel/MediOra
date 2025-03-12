@@ -1,8 +1,5 @@
-﻿using MediOra.Core.Contracts.Doctors;
-using MediOra.Core.Contracts.Patients;
-using MediOra.Core.Models.ViewModels.Doctors;
+﻿using MediOra.Core.Contracts.Patients;
 using MediOra.Core.Models.ViewModels.Patients;
-using MediOra.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediOra.Controllers
@@ -76,7 +73,7 @@ namespace MediOra.Controllers
         {
             var patient = await patientService.GetPatientByIdAsync(patientId);
 
-            if (patient != null)
+            if (patient == null)
             {
                 return NotFound();
             }
