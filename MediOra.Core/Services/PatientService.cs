@@ -3,7 +3,6 @@ using MediOra.Core.Models.ViewModels.Patients;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
 
 namespace MediOra.Core.Services
 {
@@ -14,6 +13,25 @@ namespace MediOra.Core.Services
         public PatientService(IRepository _repository)
         {
             repository = _repository;
+        }
+
+        public async Task AddPatientAsync(PatientCreateViewModel model)
+        {
+            var patient = new Patient
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Address = model.Address,
+                PhoneNumber = model.PhoneNumber,
+                City = model.City,
+                DateOfBirth = model.DateOfBirth,
+                Email = model.Email,
+                ImageUrl = model.ImageUrl
+            };
+
+            await repository.AddAsync(patient);
+            await repository.SaveChangesAsync();
+
         }
 
         public async Task DeletePatientAsync(int id)
