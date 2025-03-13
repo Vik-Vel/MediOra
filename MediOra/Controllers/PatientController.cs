@@ -21,6 +21,24 @@ namespace MediOra.Controllers
             return View(patients);
         }
 
+        [HttpGet]
+        public IActionResult AddPatient()
+        {
+            var model = new PatientCreateViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPatient(PatientCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await patientService.AddPatientAsync(model);
+            return RedirectToAction(nameof(ManageAllPatients));
+        }
 
         [HttpGet]
         public async Task<IActionResult> DetailsPatient(int patientId)
