@@ -1,7 +1,5 @@
 ﻿using MediOra.Core.Models.ViewModels.Doctors;
 using MediOra.Core.Models.ViewModels.Specialities;
-using MediOra.Infrastructure.Data.Models;
-using System.Web.Mvc;
 
 namespace MediOra.Core.Contracts.Doctors
 {

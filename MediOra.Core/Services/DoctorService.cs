@@ -4,7 +4,6 @@ using MediOra.Core.Models.ViewModels.Specialities;
 using MediOra.Infrastructure.Data.Common;
 using MediOra.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
 
 namespace MediOra.Core.Services
 {
