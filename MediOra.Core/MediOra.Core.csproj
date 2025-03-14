@@ -16,7 +16,6 @@
     <Folder Include="Models\ViewModels\Clinics\" />
     <Folder Include="Models\ViewModels\Feedbacks\" />
     <Folder Include="Models\ViewModels\MedicalRecords\" />
-    <Folder Include="Models\ViewModels\Appointments\" />
     <Folder Include="Models\ViewModels\Schedules\" />
     <Folder Include="Models\ViewModels\Notifications\" />
   </ItemGroup>
