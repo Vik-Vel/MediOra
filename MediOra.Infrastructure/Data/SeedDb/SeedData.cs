@@ -281,7 +281,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
             Appointment1 = new Appointment
             {
                 Id = 1,
-                AppointmentDate = DateTime.UtcNow.AddDays(1),
+                ScheduledTime = DateTime.UtcNow.AddDays(1),
                 DoctorId = Doctor1.Id,
                 PatientId = Patient1.Id,
                 Status = "Scheduled",
@@ -291,7 +291,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
             Appointment2 = new Appointment
             {
                 Id = 2,
-                AppointmentDate = DateTime.UtcNow.AddDays(2),
+                ScheduledTime = DateTime.UtcNow.AddDays(2),
                 DoctorId = Doctor2.Id,
                 PatientId = Patient2.Id,
                 Status = "Scheduled",
@@ -301,7 +301,7 @@ namespace MediOra.Infrastructure.Data.SeedDb
             Appointment3 = new Appointment
             {
                 Id = 3,
-                AppointmentDate = DateTime.UtcNow.AddDays(3),
+                ScheduledTime = DateTime.UtcNow.AddDays(3),
                 DoctorId = Doctor3.Id,
                 PatientId = Patient3.Id,
                 Status = "Scheduled",
