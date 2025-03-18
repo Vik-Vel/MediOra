@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediOra.Core.Contracts.Appointments;
+using MediOra.Core.Models.ViewModels.Appointments;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MediOra.Controllers
 {
     public class AppointmentController : BaseController
     {
-        public IActionResult Index()
+        private readonly IAppointmentService appointmentService;
+
+        public AppointmentController(IAppointmentService _appointmentService)
         {
-            return View();
+            appointmentService = _appointmentService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllAppointments(DateTime? startDate, DateTime? endDate, int? doctorId, int? patientId)
+        {
+           
         }
     }
 }
